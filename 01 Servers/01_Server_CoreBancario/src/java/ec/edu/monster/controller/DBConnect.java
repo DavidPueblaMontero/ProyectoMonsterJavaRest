@@ -23,7 +23,7 @@ public class DBConnect {
     String bd = "corebankmysql";
     String url = "jdbc:mysql://localhost/" + bd;
     String user = "root";
-    String pass = "11023650";
+    String pass = "";
 
     public Connection connect() {
         try {
