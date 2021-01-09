@@ -11,7 +11,8 @@ import java.sql.Date;
  *
  * @author john_
  */
-public class movimiento {
+public class Movimiento {
+
     private int INT_MOVICODIGO;
     private int INT_CUENCODIGO;
     private Date DTT_MOVIFECHA;
@@ -21,10 +22,17 @@ public class movimiento {
     private String VCH_MOVICUENTORIG;
     private String VCH_MOVICUENTDEST;
 
-    public movimiento() {
+    public Movimiento() {
     }
 
-    public movimiento(int INT_MOVICODIGO, int INT_CUENCODIGO, Date DTT_MOVIFECHA, String VCH_MOVITIPO, float DEC_MOVIVALOR, float DEC_MOVISALDOFINAL, String VCH_MOVICUENTORIG, String VCH_MOVICUENTDEST) {
+    public Movimiento(Date DTT_MOVIFECHA, String VCH_MOVITIPO, float DEC_MOVIVALOR, float DEC_MOVISALDOFINAL) {
+        this.DTT_MOVIFECHA = DTT_MOVIFECHA;
+        this.VCH_MOVITIPO = VCH_MOVITIPO;
+        this.DEC_MOVIVALOR = DEC_MOVIVALOR;
+        this.DEC_MOVISALDOFINAL = DEC_MOVISALDOFINAL;
+    }
+
+    public Movimiento(int INT_MOVICODIGO, int INT_CUENCODIGO, Date DTT_MOVIFECHA, String VCH_MOVITIPO, float DEC_MOVIVALOR, float DEC_MOVISALDOFINAL, String VCH_MOVICUENTORIG, String VCH_MOVICUENTDEST) {
         this.INT_MOVICODIGO = INT_MOVICODIGO;
         this.INT_CUENCODIGO = INT_CUENCODIGO;
         this.DTT_MOVIFECHA = DTT_MOVIFECHA;
@@ -98,8 +106,5 @@ public class movimiento {
     public void setVCH_MOVICUENTDEST(String VCH_MOVICUENTDEST) {
         this.VCH_MOVICUENTDEST = VCH_MOVICUENTDEST;
     }
-    
-    
-    
-    
+
 }
