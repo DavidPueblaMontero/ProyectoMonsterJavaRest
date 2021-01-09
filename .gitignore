@@ -12,3 +12,4 @@ nb-configuration.xml
 *.jar
 *.war
 *.ear
+DBConnect.java
