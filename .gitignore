@@ -12,4 +12,4 @@ nb-configuration.xml
 *.jar
 *.war
 *.ear
-prj_projectD/nbproject/private/private.properties
+*./private/private.properties
