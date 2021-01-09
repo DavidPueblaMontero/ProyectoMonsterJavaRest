@@ -75,7 +75,7 @@ public class ConectMovimiento {
 
         //MOVIMIENTO
         Calendar c = Calendar.getInstance();//fecha actual
-        
+
         String queryMovDebito = "INSERT INTO movimiento (INT_CUENCODIGO,DTT_MOVIFECHA,VCH_MOVITIPO,DEC_MOVIVALOR,DEC_MOVISALDOFINAL,VCH_MOVICUENTORIG,VCH_MOVICUENTDEST) values (?,?,?,?,?,?,?)";
         PreparedStatement stateMovDebito;
         stateMovDebito = connect.connect().prepareStatement(queryMovDebito);
@@ -83,11 +83,11 @@ public class ConectMovimiento {
         stateMovDebito.setString(2, c.get(Calendar.YEAR) + "/" + (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.DATE));
         stateMovDebito.setString(3, "Débito");
         stateMovDebito.setFloat(4, valor);
-        stateMovDebito.setFloat(5, valorParaDebitar-valor);
+        stateMovDebito.setFloat(5, valorParaDebitar - valor);
         stateMovDebito.setString(6, ctaOrigen);
         stateMovDebito.setString(7, ctaDestino);
         stateMovDebito.executeUpdate();
-        
+
         String queryMovAcreditar = "INSERT INTO movimiento (INT_CUENCODIGO,DTT_MOVIFECHA,VCH_MOVITIPO,DEC_MOVIVALOR,DEC_MOVISALDOFINAL,VCH_MOVICUENTORIG,VCH_MOVICUENTDEST) values (?,?,?,?,?,?,?)";
         PreparedStatement stateMovAcreditar;
         stateMovAcreditar = connect.connect().prepareStatement(queryMovAcreditar);
@@ -109,7 +109,13 @@ public class ConectMovimiento {
                 System.out.println(arg.toString());
             }
 
-            u.transferenciaDinero("4542513245", "4564564325", 10);
+            String numNew = "";
+            for (int i = 0; i < 10; i++) {
+                int numero = (int) (Math.random() * 10);
+                numNew += numero + "";
+            }
+
+            System.out.println(numNew);
 
         } catch (SQLException ex) {
             Logger.getLogger(ConectCuenta.class.getName()).log(Level.SEVERE, null, ex);

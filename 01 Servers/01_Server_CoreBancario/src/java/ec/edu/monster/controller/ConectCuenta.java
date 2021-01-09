@@ -25,13 +25,13 @@ import java.util.logging.Logger;
  */
 public class ConectCuenta {
 
-    public boolean existeCuenta(String table, String field, String data) throws SQLException {
+    public boolean existeCuenta(String numCuenta) throws SQLException {
         boolean retorno = false;
         DBConnect connect = new DBConnect();
         String query;
-        query = "SELECT * from " + table + " where " + field + " = ?";
+        query = "SELECT * from cuenta where VCH_CUENNUMERO = ?";
         PreparedStatement state = connect.connect().prepareStatement(query);
-        state.setString(1, data);
+        state.setString(1, numCuenta);
         ResultSet rs = state.executeQuery();
         Cuenta cuenta = null;
         int i = 0;
@@ -93,6 +93,12 @@ public class ConectCuenta {
 
     public boolean crearCuenta(String tipo, int cliente) {
 
+        String numNew = "";
+        for (int i = 0; i < 10; i++) {
+            int numero = (int) (Math.random() * 10);
+            numNew += numero + "";
+        }
+
         try {
             DBConnect connect = new DBConnect();
             String query;
@@ -102,12 +108,12 @@ public class ConectCuenta {
             query = "INSERT INTO `cuenta` ( `INT_CLIECODIGO`, `VCH_CUENNUMERO`, `VCH_CUENTIPO`, `DEC_CUENSALDO`, `DTT_CUENFECHACREACION`) VALUES ( ?,?,?,?,?); ";
             state = connect.connect().prepareStatement(query);
             state.setInt(1, cliente);
-            state.setString(2, "1823595454");
+            state.setString(2, numNew);
             state.setString(3, tipo);
             state.setFloat(4, 0);
             state.setDate(5, date);
             state.executeUpdate();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ConectCuenta.class.getName()).log(Level.SEVERE, null, ex);
             return false;
@@ -121,7 +127,7 @@ public class ConectCuenta {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         ConectCuenta u = new ConectCuenta();
 
         /*
@@ -143,6 +149,7 @@ public class ConectCuenta {
         } catch (Exception ex) {
             Logger.getLogger(ConectCuenta.class.getName()).log(Level.SEVERE, null, ex);
         }*/
-        System.out.println(u.crearCuenta("CORRIENTE", 1) + "");
+        //System.out.println(u.crearCuenta("CORRIENTE", 1) + "");
+        System.out.println(u.existeCuenta("1234567890") + "");
     }
 }
