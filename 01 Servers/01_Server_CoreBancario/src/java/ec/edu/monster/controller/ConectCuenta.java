@@ -9,6 +9,7 @@ import ec.edu.monster.model.Cuenta;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,7 +19,8 @@ import java.util.logging.Logger;
  */
 public class ConectCuenta {
 
-    public void econtrarCuenta(String table, String field, String data) throws SQLException {
+    public boolean existeCuenta(String table, String field, String data) throws SQLException {
+        boolean retorno = false;
         DBConnect connect = new DBConnect();
         String query;
         query = "SELECT * from " + table + " where " + field + " = ?";
@@ -26,58 +28,50 @@ public class ConectCuenta {
         state.setString(1, data);
         ResultSet rs = state.executeQuery();
         Cuenta cuenta = null;
-        // Company company = null;
-        // FinancialData financialData = null;
-/*
+        int i = 0;
         while (rs.next()) {
-            switch (table) {
-                case "user":
-                    user = new User(rs.getString("id_user"), rs.getString("name_user"), rs.getString("pass_user"), rs.getString("id_company"));
-                    break;
-                case "company":
-                    company = new Company(rs.getString("id_company"), rs.getString("name_company"), rs.getString("description_company"), rs.getString("address_company"), rs.getString("phone_company"));
-                    break;
-                case "financialdata":
-                    financialData = new FinancialData(rs.getString("id_financialData"), rs.getString("id_company"), rs.getInt("year"), rs.getDouble("sales"), rs.getDouble("salesCost"), rs.getDouble("grossProfit"), rs.getDouble("expensesAdmiSales"), rs.getDouble("depreciations"), rs.getDouble("interestPaid"), rs.getDouble("profitBeforeTaxes"), rs.getDouble("taxes"), rs.getDouble("excerciseUtility"));
-                    break;
-                default:
-                    break;
+            i++;
+            if (i == 1) {
+                rs.close();
+                return true;
             }
-        }
 
-         */
-        while (rs.next()) {
-            System.out.println(rs.getInt(3) + "");
-            /*
-    cuenta= new Cuenta(rs.getInt(1),rs.)
-        
-}
-user = new Cuenta(0, 0, query, query, 0, DTT_CUENFECHACREACION)
-        rs.close();
-        state.close();
-        switch (table) {
-            case "user":
-                return user;
-            case "company":
-                return company;
-            case "financialdata":
-                return financialData;
-            default:
-                return null;
-             */
         }
+        rs.close();
+        return retorno;
+
     }
 
     
-    
+
+    public ArrayList obtenerListaCuentas(String cedula) throws SQLException {
+        DBConnect connect = new DBConnect();
+        String query;
+        query = "SELECT cuenta.* FROM cuenta ,cliente where cuenta.INT_CLIECODIGO=cliente.INT_CLIECODIGO and cliente.VCH_CLIECEDULA='" + cedula+"'";
+        PreparedStatement state = connect.connect().prepareStatement(query);
+        ResultSet rs = state.executeQuery();
+        Cuenta tempcuenta;
+        ArrayList<Cuenta> arrcuenta = new ArrayList();
+        while (rs.next()) {
+            tempcuenta = new Cuenta(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getFloat(5), rs.getDate(6));
+            arrcuenta.add(tempcuenta);
+        }
+        rs.close();
+        state.close();
+        return arrcuenta;
+    }
+
     public static void main(String[] args) {
-        ConectCuenta u=new ConectCuenta();
+        ConectCuenta u = new ConectCuenta();
         try {
-            u.econtrarCuenta("cuenta", "VCH_CUENNUMERO", "1234567890");
+            //System.out.println("Respuesta");
+            //System.out.println(u.existeCuenta("cuenta", "VCH_CUENNUMERO", "1234567890") + "");
+            ArrayList<Cuenta> arrcuenta=u.obtenerListaCuentas("1723428304");
+            for (Cuenta arg : arrcuenta) {
+                System.out.println(arg.toString());
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ConectCuenta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
-
-

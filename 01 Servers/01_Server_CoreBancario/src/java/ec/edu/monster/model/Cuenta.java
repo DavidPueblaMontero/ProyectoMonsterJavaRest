@@ -78,6 +78,11 @@ public class Cuenta {
     public void setDTT_CUENFECHACREACION(Date DTT_CUENFECHACREACION) {
         this.DTT_CUENFECHACREACION = DTT_CUENFECHACREACION;
     }
+
+    @Override
+    public String toString() {
+        return "Cuenta{" + "INT_CUENCODIGO=" + INT_CUENCODIGO + ", INT_CLIECODIGO=" + INT_CLIECODIGO + ", VCH_CUENNUMERO=" + VCH_CUENNUMERO + ", VCH_CUENTIPO=" + VCH_CUENTIPO + ", DEC_CUENSALDO=" + DEC_CUENSALDO + ", DTT_CUENFECHACREACION=" + DTT_CUENFECHACREACION + '}';
+    }
     
     
     
