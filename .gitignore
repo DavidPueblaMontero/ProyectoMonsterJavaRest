@@ -1,0 +1,15 @@
+*.properties
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+*.class
+
+*.jar
+*.war
+*.ear
+prj_projectD/nbproject/private/private.properties
