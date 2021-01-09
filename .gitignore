@@ -13,3 +13,4 @@ nb-configuration.xml
 *.war
 *.ear
 *./private/private.properties
+/01 Servers/01_Server_CoreBancario/nbproject/private/
