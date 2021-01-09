@@ -54,8 +54,4 @@ public class DBConnect {
         c.connect();
         
     }
-
-    
-    
-    
 }

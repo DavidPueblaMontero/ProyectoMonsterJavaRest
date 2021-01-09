@@ -107,4 +107,10 @@ public class Movimiento {
         this.VCH_MOVICUENTDEST = VCH_MOVICUENTDEST;
     }
 
+    @Override
+    public String toString() {
+        return "Movimiento{" + "INT_MOVICODIGO=" + INT_MOVICODIGO + ", INT_CUENCODIGO=" + INT_CUENCODIGO + ", DTT_MOVIFECHA=" + DTT_MOVIFECHA + ", VCH_MOVITIPO=" + VCH_MOVITIPO + ", DEC_MOVIVALOR=" + DEC_MOVIVALOR + ", DEC_MOVISALDOFINAL=" + DEC_MOVISALDOFINAL + ", VCH_MOVICUENTORIG=" + VCH_MOVICUENTORIG + ", VCH_MOVICUENTDEST=" + VCH_MOVICUENTDEST + '}';
+    }
+
+    
 }
