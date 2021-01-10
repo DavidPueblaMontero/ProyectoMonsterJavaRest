@@ -104,7 +104,7 @@ public class ConectMovimiento {
     public static void main(String[] args) {
         ConectMovimiento u = new ConectMovimiento();
         try {
-            ArrayList<Movimiento> arrcuenta = u.mostrarMovimientos("4542513245");
+            /*ArrayList<Movimiento> arrcuenta = u.mostrarMovimientos("4542513245");
             for (Movimiento arg : arrcuenta) {
                 System.out.println(arg.toString());
             }
@@ -115,7 +115,11 @@ public class ConectMovimiento {
                 numNew += numero + "";
             }
 
-            System.out.println(numNew);
+            System.out.println(numNew);*/
+            
+            u.transferenciaDinero("4542513245", "4564564325", 10);
+            
+            
 
         } catch (SQLException ex) {
             Logger.getLogger(ConectCuenta.class.getName()).log(Level.SEVERE, null, ex);

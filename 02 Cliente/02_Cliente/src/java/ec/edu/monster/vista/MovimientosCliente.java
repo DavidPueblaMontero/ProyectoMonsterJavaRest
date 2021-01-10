@@ -61,8 +61,8 @@ public class MovimientosCliente extends HttpServlet {
                     + "  </thead>\n"
                     + "  <tbody>\n");
             for (Movimiento detalle : movimiento.getMovimientosCuentaSeleccionada(request.getParameter("numCuenta"))) {
-                //System.out.println(detalle.getDEC_MOVIVALOR());
-                out.print("<tr><td>" + detalle.getDTT_MOVIFECHA() + "</td></tr>\n" + "<tr><td>" + detalle.getVCH_MOVITIPO() + "</td></tr>\n" + "<tr><td>" + detalle.getDEC_MOVIVALOR() + "</td></tr>\n" + "<tr><td>" + detalle.getDEC_MOVISALDOFINAL() + "</td></tr>\n" + "<tr><td>" + detalle.getVCH_MOVICUENTORIG() + "</td></tr>\n");
+                System.out.println(detalle.getDEC_MOVIVALOR());
+                out.println("<td>" + detalle.getDTT_MOVIFECHA() + "</td>" + "<td>" + detalle.getVCH_MOVITIPO() + "</td>" + "<td>" + detalle.getDEC_MOVIVALOR() + "</td>" + "<td>" + detalle.getDEC_MOVISALDOFINAL() + "</td>" + "<td>" + detalle.getVCH_MOVICUENTORIG() + "</td>");
             }
             out.println("    <tr>\n"
                     + "      <td>Mark</td>\n"
