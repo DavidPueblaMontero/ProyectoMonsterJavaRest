@@ -68,6 +68,8 @@ public class BancaResourcesResource {
         //return confirm;
     }
 
+    
+    @Path("login")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public String Login(Usuario usu) throws SQLException {
