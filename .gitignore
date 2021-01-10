@@ -14,3 +14,4 @@ nb-configuration.xml
 *.ear
 DBConnect.java
 /01 Servers/02_Server_BancaElectronica/nbproject/private/
+/02 Cliente/02_Cliente/nbproject/private/

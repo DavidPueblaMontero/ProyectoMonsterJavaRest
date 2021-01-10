@@ -83,7 +83,8 @@ public class CoreResource {
     public void transferencia(Movimiento mov) throws SQLException {
 
         movimiento.transferenciaDinero(mov.getVCH_MOVICUENTORIG(), mov.getVCH_MOVICUENTDEST(), mov.getDEC_MOVIVALOR());
-
+        
+        
         //return confirm;
     }
 }
