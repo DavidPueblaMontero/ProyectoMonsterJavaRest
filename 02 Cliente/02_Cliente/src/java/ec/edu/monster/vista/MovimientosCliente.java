@@ -5,8 +5,12 @@
  */
 package ec.edu.monster.vista;
 
+import ec.edu.monster.controller.MovimientoOp;
+import ec.edu.monster.model.Movimiento;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,22 +34,22 @@ public class MovimientosCliente extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-       
-        
+            throws ServletException, IOException, Exception {
+
+        MovimientoOp movimiento = new MovimientoOp();
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
-            
+
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet MovimientosCliente</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1 align='center'>Movimientos de la cuenta: " + request.getParameter("numCuenta")+ "</h1>");
-            out.print("<table class=\"table table-hover table-dark\">\n"
+            out.println("<h1 align='center'>Movimientos de la cuenta: " + request.getParameter("numCuenta") + "</h1>");
+            out.println("<table class=\"table table-hover table-dark\">\n"
                     + "  <thead>\n"
                     + "    <tr>\n"
                     + "      <th scope=\"col\">Fecha Movimiento</th>\n"
@@ -55,8 +59,12 @@ public class MovimientosCliente extends HttpServlet {
                     + "      <th scope=\"col\">Cuenta que realizó el movimiento </th>\n"
                     + "    </tr>\n"
                     + "  </thead>\n"
-                    + "  <tbody>\n"
-                    + "    <tr>\n"
+                    + "  <tbody>\n");
+            for (Movimiento detalle : movimiento.getMovimientosCuentaSeleccionada(request.getParameter("numCuenta"))) {
+                //System.out.println(detalle.getDEC_MOVIVALOR());
+                out.print("<tr><td>" + detalle.getDTT_MOVIFECHA() + "</td></tr>\n" + "<tr><td>" + detalle.getVCH_MOVITIPO() + "</td></tr>\n" + "<tr><td>" + detalle.getDEC_MOVIVALOR() + "</td></tr>\n" + "<tr><td>" + detalle.getDEC_MOVISALDOFINAL() + "</td></tr>\n" + "<tr><td>" + detalle.getVCH_MOVICUENTORIG() + "</td></tr>\n");
+            }
+            out.println("    <tr>\n"
                     + "      <td>Mark</td>\n"
                     + "      <td>Mark</td>\n"
                     + "      <td>Otto</td>\n"
@@ -76,7 +84,8 @@ public class MovimientosCliente extends HttpServlet {
                     + "      <td>@twitter</td>\n"
                     + "    </tr>\n"
                     + "  </tbody>\n"
-                    + "</table>");
+                    + "</table>"
+            );
             out.println("</body>");
             out.println("</html>");
 
@@ -97,7 +106,11 @@ public class MovimientosCliente extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(MovimientosCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -111,7 +124,11 @@ public class MovimientosCliente extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(MovimientosCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

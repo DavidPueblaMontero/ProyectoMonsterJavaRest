@@ -54,8 +54,8 @@ public class CoreResource {
     @Produces(MediaType.APPLICATION_JSON)
     public boolean verificarExistenciaCuenta(@PathParam("codCuenta") String id) throws SQLException {
         //TODO return proper representation object
-
-        return cuenta.existeCuenta(id);
+        boolean n=cuenta.existeCuenta(id);
+        return n;
     }
 
     @Path("cedula/{cedulaNumero}")
