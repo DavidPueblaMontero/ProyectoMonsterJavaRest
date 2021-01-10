@@ -51,14 +51,14 @@ public class UsuarioController {
 
         CoreServicios s = new CoreServicios();
         try {
-            System.out.println(s.verificarExistenciaCuenta1("1234567890") + "");
+            System.out.println(s.verificarExistenciaCuenta1("1") + "");
         } catch (Exception ex) {
             Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    public boolean Login(String cedula, String password) {
+    public boolean login(String cedula, String password) {
         try {
 
             DBConnect connect = new DBConnect();

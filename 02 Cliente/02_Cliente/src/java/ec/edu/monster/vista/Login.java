@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,6 +35,32 @@ public class Login extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            
+            String is_boton = "";
+            
+            if (is_boton != null && is_boton != "") {
+
+                if (is_boton.equals("Login")) {
+                    
+                    if (user.validateUser(is_cedula, is_pass)) {
+                        HttpSession sesion = request.getSession();
+                        sesion.setAttribute("idUserSession", user.searchAccount(is_cedula, is_pass).getUCodigo());
+                        //is_pantalla = pantalla();
+                        request.getRequestDispatcher("srv_menu").forward(request, response);
+                        /*out.println("<script type=\"text/javascript\">\n"
+                                + "window.location=\"srv_menu\";\n"
+                                + "</script>");*/
+                    } else {
+                        //is_pantalla = pantalla();
+                        out.print("<script>\n"
+                                + "alert('¡Usuario o contraseña no encontrados!');\n"
+                                + "</script>");
+                    }
+
+                }
+            }
+            
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
