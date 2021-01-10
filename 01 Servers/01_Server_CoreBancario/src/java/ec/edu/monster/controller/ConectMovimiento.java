@@ -32,7 +32,7 @@ public class ConectMovimiento {
         ArrayList<Movimiento> movimiento = new ArrayList();
 
         while (rs.next()) {
-            temporalMovimiento = new Movimiento(rs.getString("DTT_MOVIFECHA"), rs.getString("VCH_MOVITIPO"), rs.getFloat("DEC_MOVIVALOR"), rs.getFloat("DEC_MOVISALDOFINAL"));
+            temporalMovimiento = new Movimiento(rs.getString("DTT_MOVIFECHA"), rs.getString("VCH_MOVITIPO"), rs.getFloat("DEC_MOVIVALOR"), rs.getFloat("DEC_MOVISALDOFINAL"), rs.getString("VCH_MOVICUENTORIG"), rs.getString("VCH_MOVICUENTDEST"));
             movimiento.add(temporalMovimiento);
         }
         rs.close();

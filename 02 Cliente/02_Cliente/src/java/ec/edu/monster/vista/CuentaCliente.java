@@ -5,7 +5,9 @@
  */
 package ec.edu.monster.vista;
 
+import ec.edu.monster.controller.CuentaOp;
 import ec.edu.monster.controller.MovimientoOp;
+import ec.edu.monster.model.Cuenta;
 import ec.edu.monster.model.Movimiento;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,8 +23,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author david
  */
-@WebServlet(name = "MovimientosCliente", urlPatterns = {"/MovimientosCliente"})
-public class MovimientosCliente extends HttpServlet {
+@WebServlet(name = "CuentaCliente", urlPatterns = {"/CuentaCliente"})
+public class CuentaCliente extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,8 +38,8 @@ public class MovimientosCliente extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
 
-        MovimientoOp movimiento = new MovimientoOp();
-
+        CuentaOp cuenta = new CuentaOp();
+        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
 
@@ -48,21 +50,21 @@ public class MovimientosCliente extends HttpServlet {
             out.println("<title>Servlet MovimientosCliente</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1 align='center'>Movimientos de la cuenta: " + request.getParameter("numCuenta") + "</h1>");
+            out.println("<h1 align='center'>Movimientos del cliente: " + request.getParameter("cedula") + "</h1>");
             out.println("<table class=\"table table-hover table-dark\">\n"
                     + "  <thead>\n"
                     + "    <tr>\n"
-                    + "      <th scope=\"col\">Fecha Movimiento</th>\n"
-                    + "      <th scope=\"col\">Tipo Movimiento</th>\n"
-                    + "      <th scope=\"col\">Valor Movimiento</th>\n"
-                    + "      <th scope=\"col\">Saldo Final Transacci&oacute;n</th>\n"
-                    + "      <th scope=\"col\">Cuenta que realiz&oacute; el movimiento </th>\n"
+                    + "      <th scope=\"col\">N&uacute;mero de cuenta</th>\n"
+                    + "      <th scope=\"col\">Tipo de cuenta</th>\n"
+                    + "      <th scope=\"col\">Saldo de la cuenta</th>\n"
+                    + "      <th scope=\"col\">Seleccionar </th>\n"
                     + "    </tr>\n"
                     + "  </thead>\n"
                     + "  <tbody>\n");
-            for (Movimiento detalle : movimiento.getMovimientosCuentaSeleccionada(request.getParameter("numCuenta"))) {
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            for (Cuenta detalle : cuenta.getCuentasDeUsuario(request.getParameter("cedula"))) {//OBTENER DE LA SESION LOGEADA!!!!
                 //System.out.println(detalle.getDEC_MOVIVALOR());
-                out.print("<tr><td>" + detalle.getDTT_MOVIFECHA() + "</td>" + "<td>" + detalle.getVCH_MOVITIPO() + "</td>" + "<td>" + detalle.getDEC_MOVIVALOR() + "</td>" + "<td>" + detalle.getDEC_MOVISALDOFINAL() + "</td>" + "<td>" + detalle.getVCH_MOVICUENTORIG() + "</td></tr>\n");
+                //out.print("<tr><td>" + detalle.getVCH_CUENNUMERO() + "</td>" + "<td>" + detalle.getVCH_CUENTIPO() + "</td>" + "<td>" + detalle.getDEC_CUENSALDO() + "</td></tr>\n");
             }
             out.println("  </tbody>\n"
                     + "</table>"
@@ -90,7 +92,7 @@ public class MovimientosCliente extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(MovimientosCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CuentaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -108,7 +110,7 @@ public class MovimientosCliente extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(MovimientosCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CuentaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
