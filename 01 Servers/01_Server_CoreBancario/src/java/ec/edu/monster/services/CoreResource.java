@@ -49,7 +49,7 @@ public class CoreResource {
      * @param id
      * @return an instance of java.lang.String
      */
-    @Path("{codCuenta}")//punto1
+    @Path("verificarCuenta/{codCuenta}")//punto1
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public boolean verificarExistenciaCuenta(@PathParam("codCuenta") String id) throws SQLException {
